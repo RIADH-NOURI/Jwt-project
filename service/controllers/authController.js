@@ -26,8 +26,7 @@ export const generateToken = async (req, res) => {
 
   
 };
-
-// تجديد التوكن
+//refreshToken function
 export const refreshToken = (req, res) => {
   const token = req.body.token;
   if (!token) {
