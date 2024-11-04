@@ -4,18 +4,15 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/user.js';
 import connectDB from './config/db.js';
-import bodyParser from 'body-parser';
 
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended: true}))
 dotenv.config();
 
-// Bodyparser middleware    
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 5000;
 
