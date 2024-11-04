@@ -13,7 +13,7 @@ export const generateToken = async (req, res) => {
     if (!isMatch) return res.status(400).json({ message: 'Invalid password' });
     
     const accessToken = jwt.sign({ user: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' });
-    const refreshToken = jwt.sign({ user: user._id }, process.env.REFRESH_TOKEN_SECRET);
+    const refreshToken = jwt.sign({ user: user._id }, process.env.REFRESH_TOKEN_SECRET,{expiresIn: '7d'});
     user.refreshToken = refreshToken;
         await user.save();
     res.json({ accessToken, refreshToken });
