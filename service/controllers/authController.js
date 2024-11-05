@@ -30,7 +30,7 @@ export const generateToken = async (req, res) => {
 export const refreshToken = (req, res) => {
   const token = req.body.token;
   if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: 'Invalid token' });
   }
   try {
     const decoded = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
@@ -38,7 +38,7 @@ export const refreshToken = (req, res) => {
     if (!user) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
-    const accessToken = jwt.sign({ user: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
+    const accessToken = jwt.sign({ user: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' });
     res.json({ accessToken });
   } catch (error) {
     console.error(error);
